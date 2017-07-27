@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
                         "  /                \\ \n"\
                         " /                  \\ \n"\
                         "/____________________\\ ");
-    word = select(split(loadfile("woerter.csv")));
+    word = select(split(loadfile(":/woerter.csv")));
     ui->test->setText(word);
     length = word.length();
     for(i=0;i<length-2;i++)

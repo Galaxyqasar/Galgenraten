@@ -27,3 +27,6 @@ FORMS    += mainwindow.ui \
 
 OTHER_FILES   += notes.txt\
          += woerter.csv
+
+RESOURCES += \
+    resources.qrc
