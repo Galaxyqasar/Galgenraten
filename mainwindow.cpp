@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
                         " /                  \\ \n"\
                         "/____________________\\ ");
     word = select(split(loadfile(":/woerter.csv")));
-    ui->test->setText(word);
     length = word.length();
     for(i=0;i<length-2;i++)
         guessed.append("-");
@@ -148,7 +147,8 @@ void MainWindow::loosed()
                         "/____________________\\ ");
     QFile f("tmp.txt");
     f.open(QIODevice::WriteOnly);
-    f.write(tr("Sie haben verloren.\nWollen sie erneut spielen?").toLatin1().data());
+    f.write(tr("Sie haben verloren.\nDas Wort war"\
+               "\nWollen sie erneut spielen?").insert(32, word).toLatin1().data());
     f.close();
     PopUpDialog a;
     restartb = a.exec();
@@ -184,7 +184,8 @@ void MainWindow::won()
                         "/____________________\\ ");
     QFile f("tmp.txt");
     f.open(QIODevice::WriteOnly);
-    f.write(tr("Sie haben gewonnen.\nWollen sie erneut spielen?").toLatin1().data());
+    f.write(tr("Sie haben gewonnen.\nDas Wort war"\
+               "\nWollen sie erneut spielen?").insert(32, word).toLatin1().data());
     f.close();
     PopUpDialog a;
     restartb = a.exec();
@@ -198,7 +199,7 @@ void MainWindow::maingame()
 {
     input = ui->Input->text().toUpper();
     ui->Input->setText("");
-    if(word.contains(input, Qt::CaseInsensitive))
+    if((word.contains(input, Qt::CaseInsensitive))&&(!guessed.contains(input, Qt::CaseInsensitive)))
     {
         for(i = 0;i<length;i++)
         {
@@ -390,8 +391,7 @@ void MainWindow::restart()
                         "  /                \\ \n"\
                         " /                  \\ \n"\
                         "/____________________\\ ");
-    word = select(split(loadfile("woerter.csv")));
-    ui->test->setText(word);
+    word = select(split(loadfile(":/woerter.csv")));
     length = word.length();
     for(i=0;i<length-2;i++)
         guessed.append("-");

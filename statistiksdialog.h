@@ -16,11 +16,11 @@ public:
     ~StatistiksDialog();
 
 private slots:
-    void on_pushButton_clicked();
 
 private:
     Ui::StatistiksDialog *ui;
     void inittable();
+    QList<QString> readstats();
 };
 
 #endif // STATISTIKSDIALOG_H

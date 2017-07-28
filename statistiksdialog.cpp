@@ -1,5 +1,9 @@
 #include "statistiksdialog.h"
 #include "ui_statistiksdialog.h"
+#include <string.h>
+#include <QFile>
+#include <QIODevice>
+#include <QTextStream>
 
 StatistiksDialog::StatistiksDialog(QWidget *parent) :
     QDialog(parent),
@@ -14,17 +18,12 @@ StatistiksDialog::~StatistiksDialog()
     delete ui;
 }
 
-void StatistiksDialog::on_pushButton_clicked()
-{
-    ui->tableWidget->setSortingEnabled(true);
-    ui->tableWidget->sortByColumn(0,Qt::AscendingOrder);
-    ui->tableWidget->setSortingEnabled(false);
-}
-
 void StatistiksDialog::inittable()
 {
-    QList<QString> headers;
+    QList<QString> headers, stats;
     headers << "Score"<<"gewonnen/verloren"<<"falsche/richtige Buchstaben";
+    stats = readstats();
+    QString tmp;
     ui->tableWidget->setSortingEnabled(false);
     ui->tableWidget->setRowCount(3);
     ui->tableWidget->setColumnCount(3);
@@ -33,7 +32,34 @@ void StatistiksDialog::inittable()
 //    ui->tableWidget->setColumnWidth(1, ui->tableWidget->horizontalHeader()->length()/2);
 //    ui->tableWidget->setColumnWidth(2, ui->tableWidget->horizontalHeader()->length()/2);
     ui->tableWidget->horizontalHeader()->sortIndicatorOrder();
-    ui->tableWidget->setItem(0, 0, new QTableWidgetItem("-1"));
-    ui->tableWidget->setItem(1, 0, new QTableWidgetItem("-3"));
-    ui->tableWidget->setItem(2, 0, new QTableWidgetItem("-2"));
+    for(int i=0;i<stats.size();i++)
+    {
+        tmp = stats.at(i);
+        ui->tableWidget->setItem(0, 0, new QTableWidgetItem(QString(strtok(tmp.toLatin1().data(), "-:-"))));
+        strtok(NULL, ":");
+        ui->tableWidget->setItem(0, 1, new QTableWidgetItem(QString(strtok(NULL, "-:-"))));
+        strtok(NULL, ":");
+        ui->tableWidget->setItem(0, 1, new QTableWidgetItem(QString(strtok(NULL, ";"))));
+    }
 }
+
+QList<QString> StatistiksDialog::readstats()
+{
+    QFile file("stats.txt");
+    QTextStream in(&file);
+    QString text;
+    if(file.open(QIODevice::ReadOnly))
+        text = in.readAll();
+    QList<QString> list;
+    list = text.split(";", QString::KeepEmptyParts);
+    for(int i = 0;list.size()>i;i++)
+        list.replace(i, list.at(i)+";");
+    return list;
+}
+
+
+
+
+
+
+
