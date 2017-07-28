@@ -42,12 +42,6 @@ int main()
     }
     else
         ;
-    printf("Ein Spiel von Georg™\n¿\nDie kosten für dieses Spiel betragen: 2¥, 5£, 12€ und 7$."\
-           "\nDieser Betrag wird spätestens Morgen\nvon Ihrem Konto abgebucht sein(#Virus)\n\n"\
-           "Für die entstandenen Schäden an Ihrem Computer übernimmt Georg™ keine Haftung\n\n"\
-		   "Laden sie sich noch Heute den Launcher von Georg™ herunter um weitere Spiele(z.B."\
-		   "Galgenraten2,\ Schach und 4 Gewinnt) \noder tools(z.B. einen Taschenrechner) zu "\
-		   "benutzen. Dies kostet sie 20000€ im Monat!!!!!");
 
     return 0;
 
@@ -97,7 +91,7 @@ int spiel()
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     system("clear");
 
-    printf("Galgenraten®©\n Ä = AE; Ö = OE; Ü = UE\n");
+    printf("Galgenraten\n Ä = AE; Ö = OE; Ü = UE\n");
     printf("%s\n\nFalsche Buchstaben:%s", eraten, falsch);
     for(l = 0; l < 26; l++)
     {
