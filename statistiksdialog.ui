@@ -16,17 +16,23 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTableWidget" name="tableWidget">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="editTriggers">
-      <set>QAbstractItemView::DoubleClicked</set>
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <property name="dragEnabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="dragDropOverwriteMode">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="dragDropMode">
-      <enum>QAbstractItemView::DragDrop</enum>
+      <enum>QAbstractItemView::NoDragDrop</enum>
      </property>
      <property name="sortingEnabled">
       <bool>true</bool>
